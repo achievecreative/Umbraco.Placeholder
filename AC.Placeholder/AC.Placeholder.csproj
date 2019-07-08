@@ -258,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="ContentFinders\FilterOutComponent.cs" />
     <Compile Include="Extensions\ContentExtension.cs" />
     <Compile Include="Controllers\PlaceholderApiController.cs" />
     <Compile Include="Extensions\UmbracoHelperExtension.cs" />

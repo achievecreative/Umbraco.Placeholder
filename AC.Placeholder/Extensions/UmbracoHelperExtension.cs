@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
-namespace AC.Placeholder
+namespace AC.Placeholder.Extensions
 {
     public static class UmbracoHelperExtension
     {

@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http.Results;
 using System.Web.Mvc;
+using AC.Placeholder.Extensions;
 using AC.Placeholder.Models;
 using HtmlAgilityPack;
 using Umbraco.Core.Models;
@@ -79,8 +80,7 @@ namespace AC.Placeholder.Controllers
                 return null;
             }
 
-            var contentType = Services.ContentTypeService.Get(parentContent.ContentTypeId);
-            if (contentType.ContentTypeComposition.Any(x => x.Alias == Constants.ComponentBaseDocumentAlias))
+            if (parentContent.IsComponent())
             {
                 return FindPage(parentContent);
             }

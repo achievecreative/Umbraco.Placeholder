@@ -1,0 +1,14 @@
+<div id="placeholderSelector" ng-controller="AC.PropertyEditor.PlaceholderSelectorController">
+	<p>
+		<small>
+			The place holder is defined in Page template, and different place holder mean different position in the page. <br/> The current component will be rendered in the choosed position.
+		</small>
+	</p>
+	<umb-load-indicator ng-show="loading"></umb-load-indicator>
+	<div ng-show="!loading">
+		<select name="placeholder" id="placeholder" data-ng-model="selectedPlaceholder" data-ng-change="placeholderChanged()">
+			<option>Select a placeholder</option>
+			<option value="{{item}}" ng-repeat="item in placeholders">{{item}}</option>
+		</select>
+	</div>
+</div>

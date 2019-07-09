@@ -24,7 +24,7 @@ namespace AC.Placeholder.Controllers
         [HttpGet]
         public JsonResult<PlaceholderModel> FindPlaceholder(int? nodeId)
         {
-            if ((nodeId ?? 0) < 1)
+            if (!nodeId.HasValue)
             {
                 return Json(new PlaceholderModel());
             }
@@ -74,18 +74,13 @@ namespace AC.Placeholder.Controllers
                 return null;
             }
 
-            var parentContent = Services.ContentService.GetById(content.ParentId);
-            if (parentContent == null)
+            var componentFolder = Services.ContentService.GetAncestors(content).FirstOrDefault(x => x.ContentType.Alias == Constants.ComponentFolderName);
+            if (componentFolder == null)
             {
                 return null;
             }
 
-            if (parentContent.IsComponent())
-            {
-                return FindPage(parentContent);
-            }
-
-            return parentContent;
+            return Services.ContentService.GetById(componentFolder.ParentId);
         }
     }
 }

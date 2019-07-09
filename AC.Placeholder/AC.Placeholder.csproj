@@ -258,10 +258,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="ContentFinders\FilterOutComponent.cs" />
+    <Compile Include="Components\FilterOutComponent.cs" />
     <Compile Include="Extensions\ContentExtension.cs" />
     <Compile Include="Controllers\PlaceholderApiController.cs" />
     <Compile Include="Extensions\UmbracoHelperExtension.cs" />
+    <Compile Include="FilterOutComponentFinderComposer.cs" />
     <Compile Include="Models\PlaceholderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

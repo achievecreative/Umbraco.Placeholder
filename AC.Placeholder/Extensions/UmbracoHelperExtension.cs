@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Umbraco.Core;
+using Umbraco.Core.Composing;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
@@ -10,24 +12,19 @@ namespace AC.Placeholder.Extensions
     {
         public static IHtmlString Placeholder(this UmbracoHelper helper, string key)
         {
+            var resolver = Current.Factory.GetAllInstances<IComponentResolver>().OrderBy(x => x.Order)
+                .LastOrDefault();
+
+            if (resolver == null)
+            {
+                Current.Logger.Error(typeof(IComponentResolver), "Unable to found the component resolver");
+
+                return new HtmlString("");
+            }
+
             var pageContent = helper.AssignedContentItem;
 
-            var components = new List<IPublishedContent>();
-
-            foreach (var content in pageContent.Children.Where(x=>x.ContentType.CompositionAliases.Contains(Constants.ComponentBaseDocumentAlias)))
-            {
-                var phProperty = content.Properties.FirstOrDefault(x => x.PropertyType.EditorAlias == Constants.PlaceholderSelectorEditorAlias);
-                if (phProperty == null)
-                {
-                    continue;
-                }
-
-                var placeholder = phProperty.GetValue()?.ToString();
-                if (!string.IsNullOrEmpty(placeholder) && placeholder == key)
-                {
-                    components.Add(content);
-                }
-            }
+            var components = resolver.Find(pageContent, key);
 
             var results = components.Select(x => helper.RenderTemplate(x.Id, x.TemplateId).ToHtmlString());
 

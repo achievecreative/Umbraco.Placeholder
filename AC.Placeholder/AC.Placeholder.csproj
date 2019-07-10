@@ -257,12 +257,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\ComponmentResolver.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Components\FilterOutComponent.cs" />
     <Compile Include="Extensions\ContentExtension.cs" />
     <Compile Include="Controllers\PlaceholderApiController.cs" />
     <Compile Include="Extensions\UmbracoHelperExtension.cs" />
-    <Compile Include="FilterOutComponentFinderComposer.cs" />
+    <Compile Include="IComponentResolver.cs" />
+    <Compile Include="PlaceholderComposer.cs" />
     <Compile Include="Models\PlaceholderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using LightInject;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Models.PublishedContent;
@@ -12,7 +14,7 @@ namespace AC.Placeholder.Extensions
     {
         public static IHtmlString Placeholder(this UmbracoHelper helper, string key)
         {
-            var resolver = Current.Factory.GetAllInstances<IComponentResolver>().OrderBy(x => x.Order)
+            var resolver = DependencyResolver.Current.GetServices<IComponentResolver>()
                 .LastOrDefault();
 
             if (resolver == null)

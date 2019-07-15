@@ -19,8 +19,6 @@ namespace AC.Placeholder.Controllers
     [PluginController("AC")]
     public class PlaceholderApiController : UmbracoAuthorizedJsonController
     {
-        static Regex regex = new Regex("@Umbraco\\.Placeholder\\(\"(\\w+)\"\\)");
-
         [HttpGet]
         public JsonResult<PlaceholderModel> FindPlaceholder(int? nodeId)
         {
@@ -41,25 +39,17 @@ namespace AC.Placeholder.Controllers
                 return Json(new PlaceholderModel());
             }
 
-            if (!page.TemplateId.HasValue)
+            var resolver = DependencyResolver.Current.GetServices<IPlaceholderResolver>()
+                .LastOrDefault();
+
+            var placeholderModel = resolver?.Find(page.Id);
+
+            if (placeholderModel == null)
             {
                 return Json(new PlaceholderModel());
             }
 
-            var template = Services.ContentTypeService.Get(page.ContentTypeId).AllowedTemplates.FirstOrDefault(x => x.Id == page.TemplateId.Value);
-            if (template == null)
-            {
-                return Json(new PlaceholderModel());
-            }
-
-            var matches = regex.Matches(template.Content);
-            var model = new PlaceholderModel()
-            {
-                PageId = page.Id,
-                TemplateId = template.Id,
-                Placholders = matches.Cast<Match>().Select(x => x.Groups.Cast<Group>().Select(g => g.Value).LastOrDefault()).ToArray()
-            };
-            return Json(model);
+            return Json(placeholderModel);
         }
 
         private IContent FindPage(IContent content)
@@ -74,7 +64,7 @@ namespace AC.Placeholder.Controllers
                 return null;
             }
 
-            var componentFolder = Services.ContentService.GetAncestors(content).FirstOrDefault(x => x.ContentType.Alias == Constants.ComponentFolderName);
+            var componentFolder = content.ContentType.Alias == Constants.ComponentFolderName ? content : Services.ContentService.GetAncestors(content).FirstOrDefault(x => x.ContentType.Alias == Constants.ComponentFolderName);
             if (componentFolder == null)
             {
                 return null;

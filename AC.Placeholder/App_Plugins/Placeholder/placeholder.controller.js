@@ -4,6 +4,9 @@ function placeholderSelectorController($scope, $http, umbRequestHelper, editorSt
     $scope.selectedPlaceholder = $scope.model.value ? $scope.model.value : '';
 
     var nodeId = editorState.getCurrent().id;
+    if(!nodeId){
+        nodeId = editorState.getCurrent().parentId;
+    }
     $http.post('/umbraco/backoffice/ac/placeholderapi/findplaceholder?nodeId=' + nodeId).then(function(rsp){
         $scope.loading = false;
         $scope.placeholders = rsp.data.Placholders;

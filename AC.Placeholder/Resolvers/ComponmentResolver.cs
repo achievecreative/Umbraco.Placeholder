@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Umbraco.Core.Models.PublishedContent;
 
-namespace AC.Placeholder.Components
+namespace AC.Placeholder.Resolvers
 {
     public class ComponmentResolver : IComponentResolver
     {
@@ -12,7 +11,13 @@ namespace AC.Placeholder.Components
         {
             var list = new List<IPublishedContent>();
 
-            foreach (var content in page.Children.Where(x => x.ContentType.CompositionAliases.Contains(Constants.ComponentBaseDocumentAlias)))
+            var componentFolder = page.Children.FirstOrDefault(x=>x.ContentType.Alias == Constants.ComponentFolderName);
+            if (componentFolder == null)
+            {
+                return list;
+            }
+
+            foreach (var content in componentFolder.Children.Where(x => x.ContentType.CompositionAliases.Contains(Constants.ComponentBaseDocumentAlias)))
             {
                 var phProperty = content.Properties.FirstOrDefault(x => x.PropertyType.EditorAlias == Constants.PlaceholderSelectorEditorAlias);
                 if (phProperty == null)
@@ -30,6 +35,6 @@ namespace AC.Placeholder.Components
             return list;
         }
 
-        public int Order { get { return Int32.MinValue; } }
+        public int Order => Int32.MinValue;
     }
 }

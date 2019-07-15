@@ -11,6 +11,6 @@ namespace AC.Placeholder
 
         public static string PlaceholderSelectorEditorAlias = "AC.Placeholder Selector";
 
-        public static string ComponentFolderName = "Components";
+        public static string ComponentFolderName = "componentFolder";
     }
 }

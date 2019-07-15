@@ -7,7 +7,7 @@
 	<umb-load-indicator ng-show="loading"></umb-load-indicator>
 	<div ng-show="!loading">
 		<select name="placeholder" id="placeholder" data-ng-model="selectedPlaceholder" data-ng-change="placeholderChanged()">
-			<option>Select a placeholder</option>
+			<option value="">Select a placeholder</option>
 			<option value="{{item}}" ng-repeat="item in placeholders">{{item}}</option>
 		</select>
 	</div>

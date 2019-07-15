@@ -23,8 +23,8 @@ namespace AC.Placeholder.Extensions
                 return false;
             }
 
-            return contentType.ContentTypeComposition?.Any(x => x.Alias == Constants.ComponentBaseDocumentAlias) ??
-                   false;
+            return contentType.Alias == Constants.PlaceholderSelectorEditorAlias ||
+                   (contentType.ContentTypeComposition?.Any(x => x.Alias == Constants.ComponentBaseDocumentAlias) ?? false);
         }
 
         public static bool IsComponent(this IPublishedContent content)
@@ -34,8 +34,8 @@ namespace AC.Placeholder.Extensions
                 return false;
             }
 
-            return content.ContentType.CompositionAliases?.Any(x => x == Constants.ComponentBaseDocumentAlias) ??
-                   false;
+            return content.ContentType.Alias == Constants.ComponentFolderName ||
+                   (content.ContentType.CompositionAliases?.Any(x => x == Constants.ComponentBaseDocumentAlias) ?? false);
         }
     }
 }

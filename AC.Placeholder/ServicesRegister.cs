@@ -19,7 +19,7 @@ namespace AC.Placeholder
             //Redirect Component to home page or it's parent page
             composition.Components().Append<FilterOutComponent>();
 
-            //composition.RegisterFor<IComponentResolver, ComponmentResolver>(Lifetime.Singleton);
+            // Resolvers
             composition.Register(typeof(IComponentResolver), typeof(ComponmentResolver), Lifetime.Singleton);
             composition.Register(typeof(IPlaceholderResolver), typeof(PlaceholderResolver), Lifetime.Singleton);
         }

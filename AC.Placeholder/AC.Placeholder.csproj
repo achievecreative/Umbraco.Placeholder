@@ -251,12 +251,10 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.0.2\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Documents\ComponentFolderComponent.cs" />
+    <Compile Include="IReplaceable.cs" />
     <Compile Include="Resolvers\ComponmentResolver.cs" />
     <Compile Include="Resolvers\PlaceholderResolver.cs" />
     <Compile Include="IPlaceholderResolver.cs" />

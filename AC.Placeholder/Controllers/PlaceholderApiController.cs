@@ -64,7 +64,7 @@ namespace AC.Placeholder.Controllers
                 return null;
             }
 
-            var componentFolder = content.ContentType.Alias == Constants.ComponentFolderName ? content : Services.ContentService.GetAncestors(content).FirstOrDefault(x => x.ContentType.Alias == Constants.ComponentFolderName);
+            var componentFolder = content.ContentType.Alias == Constants.ComponentFolderAlias ? content : Services.ContentService.GetAncestors(content).FirstOrDefault(x => x.ContentType.Alias == Constants.ComponentFolderAlias);
             if (componentFolder == null)
             {
                 return null;

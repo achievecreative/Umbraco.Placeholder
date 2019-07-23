@@ -11,7 +11,7 @@ namespace AC.Placeholder.Resolvers
         {
             var list = new List<IPublishedContent>();
 
-            var componentFolder = page.Children.FirstOrDefault(x=>x.ContentType.Alias == Constants.ComponentFolderName);
+            var componentFolder = page.Children.FirstOrDefault(x=>x.ContentType.Alias == Constants.ComponentFolderAlias);
             if (componentFolder == null)
             {
                 return list;

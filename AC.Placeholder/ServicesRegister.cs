@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AC.Placeholder.Components;
+using AC.Placeholder.Documents;
 using AC.Placeholder.Resolvers;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
@@ -18,6 +19,7 @@ namespace AC.Placeholder
         {
             //Redirect Component to home page or it's parent page
             composition.Components().Append<FilterOutComponent>();
+            composition.Components().Append<ComponentFolderComponent>();
 
             // Resolvers
             composition.Register(typeof(IComponentResolver), typeof(ComponmentResolver), Lifetime.Singleton);

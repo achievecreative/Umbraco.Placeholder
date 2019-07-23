@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AC.Placeholder", "AC.Placeholder\AC.Placeholder.csproj", "{AC51B90C-48CC-48EF-B558-882853C1C326}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AC.Placeholder.Features", "AC.Placeholder.Features\AC.Placeholder.Features.csproj", "{6CC08DAF-87C4-4A9A-8961-2D2880A7D299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AC51B90C-48CC-48EF-B558-882853C1C326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC51B90C-48CC-48EF-B558-882853C1C326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC51B90C-48CC-48EF-B558-882853C1C326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CC08DAF-87C4-4A9A-8961-2D2880A7D299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC08DAF-87C4-4A9A-8961-2D2880A7D299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC08DAF-87C4-4A9A-8961-2D2880A7D299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC08DAF-87C4-4A9A-8961-2D2880A7D299}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

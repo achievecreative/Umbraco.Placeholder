@@ -7,10 +7,8 @@ using Umbraco.Core.Models.PublishedContent;
 
 namespace AC.Placeholder
 {
-    public interface IComponentResolver
+    public interface IComponentResolver: IReplaceable
     {
         IEnumerable<IPublishedContent> Find(IPublishedContent page, string key);
-
-        int Order { get; }
     }
 }

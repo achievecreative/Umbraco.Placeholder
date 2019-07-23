@@ -3,10 +3,8 @@ using AC.Placeholder.Models;
 
 namespace AC.Placeholder
 {
-    public interface IPlaceholderResolver
+    public interface IPlaceholderResolver : IReplaceable
     {
         PlaceholderModel Find(int pageContentId);
-
-        int Order { get; }
     }
 }

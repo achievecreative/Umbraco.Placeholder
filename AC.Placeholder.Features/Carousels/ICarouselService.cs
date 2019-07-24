@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Umbraco.Core.Models.PublishedContent;
+﻿using Umbraco.Core.Models.PublishedContent;
 
-namespace AC.Placeholder.Features.Features.Carousels
+namespace AC.Placeholder.Features.Carousels
 {
-    public interface ICarouselService
+    public interface ICarouselService : IReplaceable
     {
         Carousel Get(IPublishedContent content);
     }

@@ -26,26 +26,47 @@ namespace AC.Placeholder.Features.Navigations
                 return null;
             }
 
-            var root = current.AncestorOrSelf(2);
+            //Home item
+            var root = current.AncestorOrSelf(1);
 
             var navs = new List<NavigationItem>()
             {
                 new NavigationItem()
                 {
-                    Title = root.GetValue<string>("title"),
+                    Title = GetNavigationTitle(root),
                     Activate =  current.Id == root.Id,
                     Url = "/"
                 }
             };
 
-            navs.AddRange(root.Children.Where(x => x.IsPage()).Select(x => new NavigationItem()
+            navs.AddRange(root.Children.Where(x => x.IsPage()).Select(x =>
             {
-                Activate = current.Id == x.Id,
-                Url = x.Url(),
-                Title = x.GetValue<String>("title")
+                var hide = x.GetValue<bool>("hideInMainNavigation");
+                if (hide)
+                {
+                    return null;
+                }
+
+                return new NavigationItem()
+                {
+                    Activate = current.Id == x.Id,
+                    Url = x.Url(),
+                    Title = GetNavigationTitle(x)
+                };
             }));
 
             return navs;
+        }
+
+        private string GetNavigationTitle(IPublishedContent content)
+        {
+            var title = content.GetValue<string>("navigationTitle");
+            if (string.IsNullOrEmpty(title))
+            {
+                title = content.Name;
+            }
+
+            return title;
         }
     }
 }

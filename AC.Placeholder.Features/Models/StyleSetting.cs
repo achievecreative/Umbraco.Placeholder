@@ -1,6 +1,6 @@
-﻿namespace AC.Placeholder.Features.Foundations.Models
+﻿namespace AC.Placeholder.Features.Models
 {
-    public class Styles
+    public class StyleSetting
     {
         public string CssClass { get; set; }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AC.Placeholder.Extensions;
-using AC.Placeholder.Features.Foundations.Models;
+using AC.Placeholder.Features.Models;
 using Umbraco.Core;
 using Umbraco.Core.Models.PublishedContent;
 
@@ -27,14 +27,19 @@ namespace AC.Placeholder.Features
             return property.GetValue().TryConvertTo<T>().Result;
         }
 
-        public static Page Page(this IPublishedContent source)
+        /// <summary>
+        /// Return null if the current node not a page
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static PageSetting PageSetting(this IPublishedContent source)
         {
             if (!source.IsPage())
             {
                 return null;
             }
 
-            return new Page()
+            return new PageSetting()
             {
                 PageDescription = source.GetValue<string>("pageDescription"),
                 PageKeywords = source.GetValue<string>("pageKeywords"),
@@ -43,7 +48,12 @@ namespace AC.Placeholder.Features
             };
         }
 
-        public static Styles Styles(this IPublishedContent source)
+        /// <summary>
+        /// Return null if the current node not a component
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static StyleSetting StyleSetting(this IPublishedContent source)
         {
             if (!source.IsComponent())
             {
@@ -55,7 +65,7 @@ namespace AC.Placeholder.Features
             var fullWidth = source.GetValue<bool>("fullWidth");
             cssClass += " " + (fullWidth ? "container-fluid" : "container");
 
-            return new Styles()
+            return new StyleSetting()
             {
                 CssClass = cssClass,
                 FullWidth = fullWidth

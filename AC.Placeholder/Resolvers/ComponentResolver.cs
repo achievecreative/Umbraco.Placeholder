@@ -5,7 +5,7 @@ using Umbraco.Core.Models.PublishedContent;
 
 namespace AC.Placeholder.Resolvers
 {
-    public class ComponmentResolver : IComponentResolver
+    public class ComponentResolver : IComponentResolver
     {
         public IEnumerable<IPublishedContent> Find(IPublishedContent page, string key)
         {

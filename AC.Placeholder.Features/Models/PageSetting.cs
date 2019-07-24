@@ -1,6 +1,6 @@
-﻿namespace AC.Placeholder.Features.Foundations.Models
+﻿namespace AC.Placeholder.Features.Models
 {
-    public class Page
+    public class PageSetting
     {
         public string PageDescription { get; set; }
 

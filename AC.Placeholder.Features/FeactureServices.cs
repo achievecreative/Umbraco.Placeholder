@@ -7,11 +7,11 @@ using AC.Placeholder.Features.Navigations;
 
 namespace AC.Placeholder.Features
 {
-    public class FeatureServices
+    public class FeactureServices
     {
-        static FeatureServices()
+        static FeactureServices()
         {
-            Instance = new FeatureServices();
+            Instance = new FeactureServices();
         }
 
         public INavigationService Navigation
@@ -22,6 +22,6 @@ namespace AC.Placeholder.Features
             }
         }
 
-        public static FeatureServices Instance { get; private set; }
+        public static FeactureServices Instance { get; private set; }
     }
 }

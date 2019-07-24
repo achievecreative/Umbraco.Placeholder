@@ -22,7 +22,7 @@ namespace AC.Placeholder
             composition.Components().Append<ComponentFolderComponent>();
 
             // Resolvers
-            composition.Register(typeof(IComponentResolver), typeof(ComponmentResolver), Lifetime.Singleton);
+            composition.Register(typeof(IComponentResolver), typeof(ComponentResolver), Lifetime.Singleton);
             composition.Register(typeof(IPlaceholderResolver), typeof(PlaceholderResolver), Lifetime.Singleton);
         }
     }

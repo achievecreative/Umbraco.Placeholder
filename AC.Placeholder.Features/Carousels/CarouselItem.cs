@@ -1,4 +1,4 @@
-﻿namespace AC.Placeholder.Features.Features.Carousels
+﻿namespace AC.Placeholder.Features.Carousels
 {
     public class CarouselItem
     {

@@ -255,7 +255,7 @@
   <ItemGroup>
     <Compile Include="Documents\ComponentFolderComponent.cs" />
     <Compile Include="IReplaceable.cs" />
-    <Compile Include="Resolvers\ComponmentResolver.cs" />
+    <Compile Include="Resolvers\ComponentResolver.cs" />
     <Compile Include="Resolvers\PlaceholderResolver.cs" />
     <Compile Include="IPlaceholderResolver.cs" />
     <Compile Include="Constants.cs" />

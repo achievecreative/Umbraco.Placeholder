@@ -24,6 +24,11 @@ namespace AC.Placeholder.Components
         {
             if (sender is PublishedRequest request)
             {
+                if (!request.PublishedContent.TemplateId.HasValue && request.PublishedContent.Parent.IsComponent())
+                {
+                    request.SetRedirect("~/");
+                }
+
                 if (request.PublishedContent.IsComponent())
                 {
                     request.SetRedirect("~/");

@@ -11,21 +11,6 @@ namespace AC.Placeholder.Features
 {
     public static class ContentExtensions
     {
-        public static T GetValue<T>(this IPublishedContent content, string alias)
-        {
-            if (content == null || string.IsNullOrEmpty(alias))
-            {
-                return default(T);
-            }
-
-            var property = content.GetProperty(alias);
-            if (property == null)
-            {
-                return default(T);
-            }
-
-            return property.GetValue().TryConvertTo<T>().Result;
-        }
 
         /// <summary>
         /// Return null if the current node not a page
@@ -60,10 +45,8 @@ namespace AC.Placeholder.Features
                 return null;
             }
 
-            var cssClass = source.GetValue<string>("cssClass");
-
             var fullWidth = source.GetValue<bool>("fullWidth");
-            cssClass += " " + (fullWidth ? "container-fluid" : "container");
+            var cssClass = $"{source.ContentType.Alias} {source.GetValue<string>("cssClass")} {(fullWidth ? "container-fluid" : "container")}";
 
             return new StyleSetting()
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,9 +29,26 @@ namespace AC.Placeholder.Extensions
 
             var components = resolver.Find(pageContent, key);
 
-            var results = components.Select(x => helper.RenderTemplate(x.Id, x.TemplateId).ToHtmlString());
+            var results = components.Select(x => RenderTemplate(helper, x.Id, x.TemplateId));
 
             return new HtmlString(string.Join("", results));
+        }
+
+        private static IHtmlString RenderTemplate(UmbracoHelper helper, int contentId, int? templateId)
+        {
+            try
+            {
+                return helper.RenderTemplate(contentId, templateId);
+            }
+            catch (Exception e)
+            {
+                if (HttpContext.Current.IsCustomErrorEnabled)
+                {
+                    return new HtmlString(e.Message);
+                }
+            }
+
+            return new HtmlString(string.Empty);
         }
     }
 }

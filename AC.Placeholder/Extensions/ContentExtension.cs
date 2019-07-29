@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 using Umbraco.Core.Models;
@@ -62,7 +64,7 @@ namespace AC.Placeholder.Extensions
                 return false;
             }
 
-            return contentType.ContentTypeCompositionExists(Constants.PageBaesAlias);
+            return contentType.ContentTypeCompositionExists(Constants.PageBaseAlias);
         }
 
         public static bool IsPage(this IPublishedContent content)
@@ -72,7 +74,66 @@ namespace AC.Placeholder.Extensions
                 return false;
             }
 
-            return content.ContentType.CompositionAliases.Any(x => x == Constants.PageBaesAlias);
+            return content.ContentType.CompositionAliases.Any(x => x == Constants.PageBaseAlias);
+        }
+
+        public static IPublishedContent SiteFolder(this IPublishedContent content)
+        {
+            return content?.AncestorOrSelf(Constants.SiteFolderAlias);
+        }
+
+        public static IContent SiteFolder(this IContent content)
+        {
+            if (content == null)
+            {
+                return null;
+            }
+
+            return Current.Services.ContentService.GetAncestors(content).FirstOrDefault(x => x.ContentType?.Alias == Constants.SiteFolderAlias);
+        }
+
+        public static IPublishedContent SiteSettings(this IPublishedContent content)
+        {
+            return content.SiteFolder()?.Children.FirstOrDefault(x => x.ContentType.Alias == Constants.SiteSettingsAlias);
+        }
+
+        public static IContent SiteSettings(this IContent content)
+        {
+            var siteFolder = content.SiteFolder();
+            if (siteFolder == null)
+            {
+                return null;
+            }
+
+            var filter = Current.SqlContext.Query<IContent>().Where(x => x.ContentType.Alias == Constants.SiteSettingsAlias);
+            return Current.Services.ContentService.GetPagedChildren(siteFolder.Id, 1, 1, out long total, filter).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Return the home node of current node
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static IPublishedContent StartNode(this IPublishedContent content)
+        {
+            return content.SiteFolder()?.Children(x => x.ContentType.Alias == Constants.HomeAlias).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Return the home node of current node
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static IContent StartNode(this IContent content)
+        {
+            var siteFolder = content.SiteFolder();
+            if (siteFolder == null)
+            {
+                return null;
+            }
+
+            var filter = Current.SqlContext.Query<IContent>().Where(x => x.ContentType.Alias == Constants.HomeAlias);
+            return Current.Services.ContentService.GetPagedChildren(siteFolder.Id, 1, 1, out long total, filter).FirstOrDefault();
         }
 
         public static T GetValue<T>(this IPublishedContent content, string alias)

@@ -27,7 +27,7 @@ namespace AC.Placeholder.Features.Navigations
             }
 
             //Home item
-            var root = current.AncestorOrSelf(1);
+            var root = current.StartNode();
 
             var navs = new List<NavigationItem>()
             {

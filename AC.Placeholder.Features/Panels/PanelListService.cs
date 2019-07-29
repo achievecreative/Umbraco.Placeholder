@@ -21,12 +21,13 @@ namespace AC.Placeholder.Features.Panels
             return new PanelList()
             {
                 Columns = content.GetValue<int>("columns"),
-                Items = content.Children.Select(x=>new PanelItem()
+                Items = content.Children.Select(x => new PanelItem()
                 {
                     Image = x.GetMediaUrl("image"),
                     Title = x.GetValue<string>("title"),
                     Content = x.GetValue<string>("content")
-                })
+                }),
+                Styles = content.Styles()
             };
         }
     }

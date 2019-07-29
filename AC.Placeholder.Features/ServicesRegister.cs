@@ -1,9 +1,6 @@
-﻿using AC.Placeholder.Components;
-using AC.Placeholder.Documents;
-using AC.Placeholder.Features.Carousels;
+﻿using AC.Placeholder.Features.Carousels;
 using AC.Placeholder.Features.Navigations;
 using AC.Placeholder.Features.Panels;
-using AC.Placeholder.Resolvers;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
 

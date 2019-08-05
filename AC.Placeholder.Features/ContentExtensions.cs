@@ -17,7 +17,7 @@ namespace AC.Placeholder.Features
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static PageSetting PageSetting(this IPublishedContent source)
+        public static PageSetting Page(this IPublishedContent source)
         {
             if (!source.IsPage())
             {
@@ -38,7 +38,7 @@ namespace AC.Placeholder.Features
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static StyleSetting StyleSetting(this IPublishedContent source)
+        public static StyleSetting Styles(this IPublishedContent source)
         {
             if (!source.IsComponent())
             {

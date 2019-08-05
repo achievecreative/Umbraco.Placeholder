@@ -7,9 +7,9 @@ using Umbraco.Core.Composing;
 using Umbraco.Core.Models.Entities;
 using Umbraco.Core.Services.Implement;
 
-namespace AC.Placeholder.Documents
+namespace AC.Placeholder.ContentStructures
 {
-    public class ComponentFolderComponent : IComponent
+    public class InitialComponentFolderComponent : IComponent
     {
         public void Initialize()
         {

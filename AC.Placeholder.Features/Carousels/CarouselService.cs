@@ -27,7 +27,8 @@ namespace AC.Placeholder.Features.Carousels
                     Content = x.GetValue<string>("content"),
                     ContentPosition = x.GetValue<string>("contentPosition"),
                     Title = x.GetValue<string>("title")
-                })
+                }),
+                Styles = content.Styles()
             };
         }
 

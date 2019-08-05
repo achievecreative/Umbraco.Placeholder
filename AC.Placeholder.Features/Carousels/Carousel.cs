@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using AC.Placeholder.Features.Models;
 
 namespace AC.Placeholder.Features.Carousels
 {
-    public class Carousel
+    public class Carousel : Component
     {
         public bool HasIndicator { get; set; }
 

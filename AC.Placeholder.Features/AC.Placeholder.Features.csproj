@@ -104,6 +104,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\AC_Carousel.cshtml" />
+    <Content Include="Views\AC_FeaturePanel.cshtml" />
+    <Content Include="Views\AC_GoogleMap.cshtml" />
+    <Content Include="Views\AC_Links.cshtml" />
+    <Content Include="Views\AC_PageList.cshtml" />
+    <Content Include="Views\AC_Panels.cshtml" />
+    <Content Include="Views\AC_RawHtml.cshtml" />
+    <Content Include="Views\AC_SearchBox.cshtml" />
+    <Content Include="Views\AC_SearchResult.cshtml" />
+    <Content Include="Views\AC_StaticContent.cshtml" />
+    <Content Include="Views\AC_Video.cshtml" />
+    <Content Include="Views\Componments.cshtml" />
+    <Content Include="Views\BlogLandingPage.cshtml" />
+    <Content Include="Views\BlogPost.cshtml" />
+    <Content Include="Views\ContentPage.cshtml" />
+    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\pageBase.cshtml" />
+    <Content Include="Views\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -117,9 +135,7 @@
       <Name>AC.Placeholder</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

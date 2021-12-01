@@ -1,28 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 using AC.Placeholder.Components;
 using AC.Placeholder.ContentStructures;
 using AC.Placeholder.Resolvers;
-using Umbraco.Cms.Core;
-using Umbraco.Cms.Core.Composing;
-using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Core;
+using Umbraco.Core.Composing;
+using Umbraco.Web;
 
 namespace AC.Placeholder
 {
     [RuntimeLevel(MinLevel = RuntimeLevel.Run)]
-    public class ServicesRegister : IComposer
+    public class ServicesRegister : IUserComposer
     {
-        public ServicesRegister()
-        {
-
-        }
-
         public void Compose(Composition composition)
         {
             //Redirect Component to home page or it's parent page
             composition.Components().Append<FilterOutComponent>();
-
-
 
             //Setup content structure
             composition.Components().Append<InitialComponentFolderComponent>();
@@ -30,13 +26,6 @@ namespace AC.Placeholder
             // Resolvers
             composition.Register(typeof(IComponentResolver), typeof(ComponentResolver), Lifetime.Singleton);
             composition.Register(typeof(IPlaceholderResolver), typeof(PlaceholderResolver), Lifetime.Singleton);
-        }
-
-        public void Compose(IUmbracoBuilder builder)
-        {
-            builder.Components().Append<FilterOutComponent>();
-            
-            throw new NotImplementedException();
         }
     }
 }

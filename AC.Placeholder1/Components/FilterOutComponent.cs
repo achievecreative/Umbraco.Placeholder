@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using AC.Placeholder.Extensions;
 using Umbraco.Web.Routing;
 using Umbraco.Core.Composing;
-using Umbraco.Cms.Core.Routing;
-using Umbraco.Cms.Core.Composing;
+using IComponent = Umbraco.Core.Composing.IComponent;
 
 namespace AC.Placeholder.Components
 {
@@ -17,9 +17,6 @@ namespace AC.Placeholder.Components
     {
         public void Initialize()
         {
-            
-            PublishedRequestBuilder.
-            PublishedContentRequest
             PublishedRequest.Prepared += PublishedRequest_Prepared;
         }
 
@@ -42,11 +39,6 @@ namespace AC.Placeholder.Components
         public void Terminate()
         {
             PublishedRequest.Prepared -= PublishedRequest_Prepared;
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

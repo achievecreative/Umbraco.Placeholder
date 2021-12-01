@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Core.Services;
-using Umbraco.Web;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Web;
+using Umbraco.Cms.Web.Common.UmbracoContext;
+using Umbraco.Extensions;
+
 
 namespace AC.Placeholder.Extensions
 {
@@ -18,13 +20,17 @@ namespace AC.Placeholder.Extensions
             if (content == null)
             {
                 return false;
-            }
+}
+            
+            ServiceContext.CreatePartialServiceContext(content);
 
             var contentType = Current.Services.ContentTypeService.Get(content.ContentTypeId);
             if (contentType == null)
             {
                 return false;
             }
+
+            content.
 
             return content.IsComponentFolder() ||
                    (contentType.ContentTypeComposition?.Any(x => x.Alias == Constants.ComponentBaseDocumentAlias) ?? false);

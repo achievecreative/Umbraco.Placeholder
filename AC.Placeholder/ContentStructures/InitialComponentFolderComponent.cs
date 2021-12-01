@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AC.Placeholder.Extensions;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models.Entities;
-using Umbraco.Core.Services.Implement;
+using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.DependencyInjection;
+using Umbraco.Cms.Core.Models.Entities;
+using Umbraco.Cms.Core.Services.Implement;
 
 namespace AC.Placeholder.ContentStructures
 {
     public class InitialComponentFolderComponent : IComponent
     {
+        private IUmbracoBuilder umbracoBuilder;
+        public InitialComponentFolderComponent(IUmbracoBuilder umbracoBuilder)
+        {
+            this.umbracoBuilder = umbracoBuilder;
+        }
+
         public void Initialize()
         {
+            this.umbracoBuilder.AddNotificationHandler<>()
             ContentService.Saved += ContentService_Saved;
         }
 

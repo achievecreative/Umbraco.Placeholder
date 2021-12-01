@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using AC.Placeholder.Models;
-using Umbraco.Core.Composing;
+using Umbraco.Cms.Core.Services;
 
 namespace AC.Placeholder.Resolvers
 {
@@ -10,16 +10,22 @@ namespace AC.Placeholder.Resolvers
     {
         static readonly Regex Regex = new Regex("@Umbraco\\.Placeholder\\(\"(\\w+)\"\\)");
 
+        private IContentService _contentService;
+        public PlaceholderResolver(IContentService contentService)
+        {
+            _contentService = contentService;
+        }
+
         public PlaceholderModel Find(int pageContentId)
         {
-            var page = Current.Services.ContentService.GetById(pageContentId);
+            var page = _contentService.GetById(pageContentId);
 
             if (!page.TemplateId.HasValue)
             {
                 return null;
             }
 
-            var template = Current.Services.ContentTypeService.Get(page.ContentTypeId).AllowedTemplates.FirstOrDefault(x => x.Id == page.TemplateId.Value);
+            var template = _contentService.Get(page.ContentTypeId).AllowedTemplates.FirstOrDefault(x => x.Id == page.TemplateId.Value);
             if (template == null)
             {
                 return null;

@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using LightInject;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web;
+using Umbraco.Cms.Core.Strings;
+using Umbraco.Cms.Web.Common;
 
 namespace AC.Placeholder.Extensions
 {
     public static class UmbracoHelperExtension
     {
-        public static IHtmlString Placeholder(this UmbracoHelper helper, string key)
+        public static IHtmlEncodedString Placeholder(this UmbracoHelper helper, string key)
         {
+
             var resolver = DependencyResolver.Current.GetServices<IComponentResolver>()
                 .LastOrDefault();
 
@@ -22,7 +17,7 @@ namespace AC.Placeholder.Extensions
             {
                 Current.Logger.Error(typeof(IComponentResolver), "Unable to found the component resolver");
 
-                return new HtmlString("");
+                return new HtmlEncodedString(string.Empty);
             }
 
             var pageContent = helper.AssignedContentItem;
@@ -31,24 +26,25 @@ namespace AC.Placeholder.Extensions
 
             var results = components.Select(x => RenderTemplate(helper, x.Id, x.TemplateId));
 
-            return new HtmlString(string.Join("", results));
+            return new HtmlEncodedString(string.Join("", results));
         }
 
-        private static IHtmlString RenderTemplate(UmbracoHelper helper, int contentId, int? templateId)
+        private static async Task<IHtmlEncodedString> RenderTemplate(UmbracoHelper helper, int contentId, int? templateId)
         {
             try
             {
-                return helper.RenderTemplate(contentId, templateId);
+                return await helper.RenderTemplateAsync(contentId, templateId);
             }
             catch (Exception e)
             {
+                helper.
                 if (HttpContext.Current.IsCustomErrorEnabled)
                 {
                     return new HtmlString(e.Message);
                 }
             }
 
-            return new HtmlString(string.Empty);
+            return new HtmlEncodedString(string.Empty);
         }
     }
 }

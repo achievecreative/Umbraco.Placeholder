@@ -5,12 +5,12 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{8A27BA71-5F5C-44D1-BD48-B262D1DB4219}"
 	ProjectSection(SolutionItems) = preProject
-		deploy.ps1 = deploy.ps1
+		build.ps1 = build.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AC.Placeholder", "AC.Placeholder\AC.Placeholder.csproj", "{155E039B-692B-4A3F-97D8-767121BFE287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AC.Placeholder.Features", "AC.Placeholder.Features\AC.Placeholder.Features.csproj", "{1A636536-C187-4040-882A-98E4456E0A22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AC.Placeholder.Features", "AC.Placeholder.Features\AC.Placeholder.Features.csproj", "{1A636536-C187-4040-882A-98E4456E0A22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

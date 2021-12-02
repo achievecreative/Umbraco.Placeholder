@@ -10,7 +10,7 @@ using Umbraco.Cms.Core.Services;
 
 namespace AC.Placeholder.Notifications
 {
-    public class ContentSaveNotificationHandler : INotificationHandler<ContentSavingNotification>
+    public class ContentSaveNotificationHandler : INotificationHandler<ContentSavedNotification>
     {
         private IContentService contentService;
         public ContentSaveNotificationHandler(IContentService contentService)
@@ -18,7 +18,7 @@ namespace AC.Placeholder.Notifications
             this.contentService = contentService;
         }
 
-        public void Handle(ContentSavingNotification notification)
+        public void Handle(ContentSavedNotification notification)
         {
             var entity = notification.SavedEntities.FirstOrDefault();
             var isNew = ((IRememberBeingDirty)entity)?.WasPropertyDirty("Id") ?? false;

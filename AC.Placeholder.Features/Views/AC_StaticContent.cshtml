@@ -1,0 +1,14 @@
+﻿@using AC.Placeholder.Features
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "componments.cshtml";
+}
+
+<div class="@(Model.Styles().CssClass)">
+    <div class="row">
+        <div class="inner">
+            @Html.Raw(Model.Value("content"))
+        </div>
+    </div>
+</div>

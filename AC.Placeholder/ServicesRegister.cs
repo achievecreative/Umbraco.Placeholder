@@ -2,6 +2,7 @@
 using System.Linq;
 using AC.Placeholder.Components;
 using AC.Placeholder.ContentStructures;
+using AC.Placeholder.Extensions;
 using AC.Placeholder.Resolvers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Umbraco.Cms.Core;

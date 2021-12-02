@@ -11,9 +11,11 @@ namespace AC.Placeholder.Resolvers
         static readonly Regex Regex = new Regex("@Umbraco\\.Placeholder\\(\"(\\w+)\"\\)");
 
         private IContentService _contentService;
-        public PlaceholderResolver(IContentService contentService)
+        private IContentTypeService _contentTypeService;
+        public PlaceholderResolver(IContentService contentService, IContentTypeService contentTypeService)
         {
             _contentService = contentService;
+            _contentTypeService = contentTypeService;
         }
 
         public PlaceholderModel Find(int pageContentId)
@@ -25,7 +27,7 @@ namespace AC.Placeholder.Resolvers
                 return null;
             }
 
-            var template = _contentService.Get(page.ContentTypeId).AllowedTemplates.FirstOrDefault(x => x.Id == page.TemplateId.Value);
+            var template = _contentTypeService.Get(page.ContentTypeId).AllowedTemplates.FirstOrDefault(x => x.Id == page.TemplateId.Value);
             if (template == null)
             {
                 return null;

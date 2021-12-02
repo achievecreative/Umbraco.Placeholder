@@ -1,7 +1,0 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.RawHtml>
-@using ContentModels = Umbraco.Web.PublishedModels;
-@{
-	Layout = "componments.cshtml";
-}
-
-@Html.Raw(Model.Value("html"))

@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
+using Umbraco.Cms.Infrastructure.Persistence;
+using Umbraco.Cms.Web.Common.DependencyInjection;
 using Umbraco.Cms.Web.Common.UmbracoContext;
 using Umbraco.Extensions;
 
@@ -20,20 +24,15 @@ namespace AC.Placeholder.Extensions
             if (content == null)
             {
                 return false;
-}
-            
-            ServiceContext.CreatePartialServiceContext(content);
+            }
 
-            var contentType = Current.Services.ContentTypeService.Get(content.ContentTypeId);
+            var contentType = InternalServiceProvider.Instance?.GetService<IContentTypeService>()?.Get(content.ContentTypeId);
             if (contentType == null)
             {
                 return false;
             }
 
-            content.
-
-            return content.IsComponentFolder() ||
-                   (contentType.ContentTypeComposition?.Any(x => x.Alias == Constants.ComponentBaseDocumentAlias) ?? false);
+            return content.IsComponentFolder() || (contentType.ContentTypeComposition?.Any(x => x.Alias == Constants.ComponentBaseDocumentAlias) ?? false);
         }
 
         public static bool IsComponent(this IPublishedContent content)
@@ -64,7 +63,7 @@ namespace AC.Placeholder.Extensions
                 return false;
             }
 
-            var contentType = Current.Services.ContentTypeService.Get(content.ContentTypeId);
+            var contentType = InternalServiceProvider.Instance?.GetService<IContentTypeService>()?.Get(content.ContentTypeId);
             if (contentType == null)
             {
                 return false;
@@ -95,7 +94,7 @@ namespace AC.Placeholder.Extensions
                 return null;
             }
 
-            return Current.Services.ContentService.GetAncestors(content).FirstOrDefault(x => x.ContentType?.Alias == Constants.SiteFolderAlias);
+            return InternalServiceProvider.Instance?.GetService<IContentService>()?.GetAncestors(content).FirstOrDefault(x => x.ContentType?.Alias == Constants.SiteFolderAlias);
         }
 
         public static IPublishedContent SiteSettings(this IPublishedContent content)
@@ -111,8 +110,8 @@ namespace AC.Placeholder.Extensions
                 return null;
             }
 
-            var filter = Current.SqlContext.Query<IContent>().Where(x => x.ContentType.Alias == Constants.SiteSettingsAlias);
-            return Current.Services.ContentService.GetPagedChildren(siteFolder.Id, 1, 1, out long total, filter).FirstOrDefault();
+            var filter = InternalServiceProvider.Instance?.GetService<ISqlContext>()?.Query<IContent>().Where(x => x.ContentType.Alias == Constants.SiteSettingsAlias);
+            return InternalServiceProvider.Instance?.GetService<IContentService>()?.GetPagedChildren(siteFolder.Id, 1, 1, out long total, filter).FirstOrDefault();
         }
 
         /// <summary>
@@ -138,8 +137,8 @@ namespace AC.Placeholder.Extensions
                 return null;
             }
 
-            var filter = Current.SqlContext.Query<IContent>().Where(x => x.ContentType.Alias == Constants.HomeAlias);
-            return Current.Services.ContentService.GetPagedChildren(siteFolder.Id, 1, 1, out long total, filter).FirstOrDefault();
+            var filter = InternalServiceProvider.Instance?.GetService<ISqlContext>()?.Query<IContent>().Where(x => x.ContentType.Alias == Constants.HomeAlias);
+            return InternalServiceProvider.Instance?.GetService<IContentService>()?.GetPagedChildren(siteFolder.Id, 1, 1, out long total, filter).FirstOrDefault();
         }
 
         public static T GetValue<T>(this IPublishedContent content, string alias)
@@ -171,7 +170,7 @@ namespace AC.Placeholder.Extensions
                 return null;
             }
 
-            return media.GetUrl();
+            return media.Url();
         }
     }
 }

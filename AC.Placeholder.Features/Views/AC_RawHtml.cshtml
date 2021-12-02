@@ -1,0 +1,7 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "componments.cshtml";
+}
+
+@Html.Raw(Model.Value("html"))

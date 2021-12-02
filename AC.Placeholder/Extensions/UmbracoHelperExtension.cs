@@ -1,5 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Strings;
 using Umbraco.Cms.Web.Common;
 
@@ -10,12 +16,11 @@ namespace AC.Placeholder.Extensions
         public static IHtmlEncodedString Placeholder(this UmbracoHelper helper, string key)
         {
 
-            var resolver = DependencyResolver.Current.GetServices<IComponentResolver>()
-                .LastOrDefault();
+            var resolver = InternalServiceProvider.Instance.GetServices<IComponentResolver>().LastOrDefault();
 
             if (resolver == null)
             {
-                Current.Logger.Error(typeof(IComponentResolver), "Unable to found the component resolver");
+                InternalServiceProvider.Instance.GetService<ILogger<IComponentResolver>>().LogError("Unable to found the component resolver");
 
                 return new HtmlEncodedString(string.Empty);
             }
@@ -37,10 +42,10 @@ namespace AC.Placeholder.Extensions
             }
             catch (Exception e)
             {
-                helper.
-                if (HttpContext.Current.IsCustomErrorEnabled)
+                var hostEnvironment = InternalServiceProvider.Instance.GetService<IHostEnvironment>();
+                if (hostEnvironment.IsDevelopment())
                 {
-                    return new HtmlString(e.Message);
+                    return new HtmlEncodedString(e.Message);
                 }
             }
 

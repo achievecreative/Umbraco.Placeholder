@@ -11,10 +11,6 @@
 		<PackageReference Include="Umbraco.Cms.Core" Version="9.1.1" />
 		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.1.1" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Migrations\" />
-	</ItemGroup>
 	<ItemGroup>
 		<Content Include="App_Plugins\Placeholder\**\*.*">
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>

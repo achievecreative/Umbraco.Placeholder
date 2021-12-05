@@ -1,12 +1,12 @@
-﻿@using AC.Placeholder.Extensions
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using AC.Placeholder.Extensions
 @using AC.Placeholder.Features
 @using AC.Placeholder.Features.Carousels
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-
 @inject ICarouselService carouselService;
 
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-    Layout = "componments.cshtml";
+	Layout = null;
 }
 
 @{
@@ -19,7 +19,6 @@
     {
         return;
     }
-
     var index = 0;
 }
 

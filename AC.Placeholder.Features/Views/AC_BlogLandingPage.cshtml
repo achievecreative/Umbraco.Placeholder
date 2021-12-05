@@ -1,7 +1,8 @@
 ﻿@using AC.Placeholder.Extensions
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
 @{
-	Layout = "pageBase.cshtml";
+	Layout = "AC_PageLayout.cshtml";
 }
 
-@Umbraco.Placeholder("main")
+@await Umbraco.PlaceholderAsync("main")

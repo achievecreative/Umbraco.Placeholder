@@ -8,7 +8,7 @@ namespace AC.Placeholder.Resolvers
 {
     public class PlaceholderResolver : IPlaceholderResolver
     {
-        static readonly Regex Regex = new Regex("@Umbraco\\.Placeholder\\(\"(\\w+)\"\\)");
+        static readonly Regex Regex = new Regex("Umbraco\\.PlaceholderAsync\\(\"(\\w+)\"\\)");
 
         private IContentService _contentService;
         private IContentTypeService _contentTypeService;

@@ -1,13 +1,12 @@
-﻿@using AC.Placeholder.Features
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using AC.Placeholder.Features
 @using AC.Placeholder.Features.Panels
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject IPanelListService panelListService;
 
 @{
-    Layout = "componments.cshtml";
+	Layout = null;
 }
-
-
 @{
     var styleSetting = Umbraco.AssignedContentItem.Styles();
 

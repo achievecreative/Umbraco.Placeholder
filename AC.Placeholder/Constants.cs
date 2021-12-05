@@ -15,12 +15,12 @@ namespace AC.Placeholder
 
         public static string ComponentFolderName = "Components";
 
-        public static string PageBaseAlias = "pageBase";
+        public static string PageBaseAlias = "acPageBase";
 
-        public static string SiteSettingsAlias = "siteSettings";
+        public static string SiteSettingsAlias = "acSiteSettings";
 
-        public static string SiteFolderAlias = "siteFolder";
+        public static string SiteFolderAlias = "acSiteFolder";
 
-        public static string HomeAlias = "home";
+        public static string HomeAlias = "acHome";
     }
 }

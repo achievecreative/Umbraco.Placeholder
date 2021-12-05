@@ -1,11 +1,9 @@
-﻿@using AC.Placeholder.Features
-@using Umbraco.Extensions
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using AC.Placeholder.Features
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-
 @{
-	Layout = "componments.cshtml";
+	Layout = null;
 }
-
 <div class="@(Model.Styles().CssClass)">
     <div class="row">
         @Html.Raw(Model.Value("content"))

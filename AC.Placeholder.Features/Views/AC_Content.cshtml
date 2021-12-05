@@ -1,14 +1,37 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @using AC.Placeholder.Features
+@using AC.Placeholder.Extensions
+@using AC.Placeholder.Features.ImageContents
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject IImageContentService _imageContentService;
+
 @{
-	Layout = null;
+    Layout = null;
+    var imageContent = _imageContentService.Get(Model);
+    if (imageContent == null)
+    {
+        return;
+    }
+
+    var styles = Model.Styles();
 }
 
-<div class="@(Model.Styles().CssClass)">
-    <div class="row">
-        <div class="inner">
-            @Html.Raw(Model.Value("content"))
+<section class="@(styles.SectionCssClass)">
+    <div class="@(styles.CssClass)">
+        <div class="row gx-5 align-items-center">
+            @(!imageContent.ImageAtTheRight){
+            <div class="col-lg-@(imageContent.ImageColumnSize) order-first order-lg-last">
+                <img class="img-fluid rounded mb-5 mb-lg-0" src="@(imageContent.ImageUrl)" alt="@(imageContent.ImageAlt)" />
+            </div>
+            }
+            <div class="col-lg-@(12 - imageContent.ImageColumnSize)">
+                @Html.Raw(Model.Value("content"))
+            </div>
+            @(imageContent.ImageAtTheRight){
+            <div class="col-lg-@(imageContent.ImageColumnSize) order-first order-lg-last">
+                <img class="img-fluid rounded mb-5 mb-lg-0" src="@(imageContent.ImageUrl)" alt="@(imageContent.ImageAlt)" />
+            </div>
+            }
         </div>
     </div>
-</div>
+</section>

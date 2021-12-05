@@ -5,5 +5,7 @@
         public string CssClass { get; set; }
 
         public bool FullWidth { get; set; }
+
+        public string SectionCssClass { get; set; }
     }
 }

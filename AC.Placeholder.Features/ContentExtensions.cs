@@ -46,7 +46,8 @@ namespace AC.Placeholder.Features
             return new StyleSetting()
             {
                 CssClass = cssClass,
-                FullWidth = fullWidth
+                FullWidth = fullWidth,
+                SectionCssClass = source.GetValue<string>("componentSectionCssClass")
             };
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
@@ -35,6 +36,11 @@ namespace AC.Placeholder.Extensions
             return content.IsComponentFolder() || (contentType.ContentTypeComposition?.Any(x => x.Alias == Constants.ComponentBaseDocumentAlias) ?? false);
         }
 
+        /// <summary>
+        /// Check is the content a AC.Placeholder component or not.
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public static bool IsComponent(this IPublishedContent content)
         {
             if (content == null)
@@ -155,6 +161,41 @@ namespace AC.Placeholder.Extensions
             }
 
             return property.GetValue().TryConvertTo<T>().Result;
+        }
+
+        /// <summary>
+        /// Try to get the string value for given properties. You can pass in a list of properties and a default value
+        /// <para>
+        /// 
+        /// </para>
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="propertyAliases"></param>
+        /// <returns></returns>
+        public static string GetStringValue(this IPublishedContent content, string defaultValue, params string[] propertyAliases)
+        {
+            if (content == null || propertyAliases == null || propertyAliases.Length == 0)
+            {
+                return defaultValue;
+            }
+
+            foreach (var propertyAlias in propertyAliases)
+            {
+                var property = content.GetProperty(propertyAlias);
+                if (property == null)
+                {
+                    continue;
+                }
+
+                var value = property.GetValue().TryConvertTo<string>().Result;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    return value;
+                }
+            }
+
+            return defaultValue;
         }
 
         public static string GetMediaUrl(this IPublishedContent content, string alias)

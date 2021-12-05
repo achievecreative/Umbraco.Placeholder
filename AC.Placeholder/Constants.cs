@@ -7,11 +7,11 @@ namespace AC.Placeholder
 {
     public static class Constants
     {
-        public static string ComponentBaseDocumentAlias = "componentBase";
+        public static string ComponentBaseDocumentAlias = "acComponentBase";
 
         public static string PlaceholderSelectorEditorAlias = "AC.Placeholder Selector";
 
-        public static string ComponentFolderAlias = "componentFolder";
+        public static string ComponentFolderAlias = "acComponentFolder";
 
         public static string ComponentFolderName = "Components";
 

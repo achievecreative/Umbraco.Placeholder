@@ -12,6 +12,7 @@ using Umbraco.Cms.Web.Common.Attributes;
 namespace AC.Placeholder.Controllers
 {
     [PluginController("AC")]
+    [IsBackOffice]
     public class PlaceholderApiController : UmbracoAuthorizedJsonController
     {
         private IPlaceholderResolver _placeholderResolver;
@@ -23,7 +24,7 @@ namespace AC.Placeholder.Controllers
             _placeholderResolver = placeholderResolver;
         }
 
-        [HttpGet]
+        [HttpPost]
         public PlaceholderModel FindPlaceholder(int? nodeId)
         {
             if (!nodeId.HasValue)

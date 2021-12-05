@@ -7,7 +7,7 @@ using Umbraco.Cms.Core.DependencyInjection;
 
 namespace AC.Placeholder.Features
 {
-    public class ServicesRegister : IComposer
+    public class PluginStartup : IComposer
     {
         public void Compose(IUmbracoBuilder builder)
         {

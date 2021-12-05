@@ -7,7 +7,6 @@ namespace AC.Placeholder.Features
 {
     public static class ContentExtensions
     {
-
         /// <summary>
         /// Return null if the current node not a page
         /// </summary>

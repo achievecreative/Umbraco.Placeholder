@@ -7,10 +7,13 @@ using Umbraco.Cms.Core.Notifications;
 
 namespace AC.Placeholder
 {
-    public class ServicesRegister : IComposer
+    public class PluginStartup : IComposer
     {
         public void Compose(IUmbracoBuilder builder)
         {
+            //application start, set ServiceProvider
+            builder.AddNotificationHandler<UmbracoApplicationStartingNotification, ApplicationStartingNotificationHandler>();
+
             //Setup content structure
             builder.AddNotificationHandler<ContentSavedNotification, ContentSaveNotificationHandler>();
 

@@ -11,5 +11,9 @@
         public bool ImageAtTheRight { get; set; }
 
         public int ImageColumnSize { get; set; }
+
+        public int ContentColumnSize { get; set; }
+
+        public bool HasImage { get; set; }
     }
 }

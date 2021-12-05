@@ -16,14 +16,23 @@ namespace AC.Placeholder.Features.ImageContents
             }
 
             var image = content.GetValue<IPublishedContent>("image");
+            var imageUrl = image.Url();
+            var imageColSize = content.GetValue<int>("imageColumnSize");
+            var contentColSize = string.IsNullOrEmpty(imageUrl) ? 12 : 12 - imageColSize;
+            if (contentColSize < 1)
+            {
+                contentColSize = 12;
+            }
 
             return new ImageContent()
             {
-                ImageUrl = image?.Url(),
+                HasImage = !string.IsNullOrEmpty(imageUrl),
+                ImageUrl = imageUrl,
                 ImageAlt = image.GetStringValue(content.Name, "umbracoAlt"),
                 Content = content.GetValue<string>("content"),
                 ImageAtTheRight = content.GetValue<bool>("imageAtRight"),
-                ImageColumnSize = content.GetValue<int>("imageColumnSize")
+                ImageColumnSize = imageColSize,
+                ContentColumnSize = contentColSize
             };
         }
     }

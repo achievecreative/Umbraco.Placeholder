@@ -1,12 +1,12 @@
 ﻿@using AC.Placeholder.Features
-@using AC.Placeholder.Features.ImageContents
+@using AC.Placeholder.Features.Contents
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@inject IImageContentService _imageContentService;
+@inject IContentService _contentService;
 
 @{
     Layout = null;
-    var imageContent = _imageContentService.Get(Model);
-    if (imageContent == null)
+    var content = _contentService.Get(Model);
+    if (content == null)
     {
         return;
     }
@@ -16,20 +16,6 @@
 
 <section class="@(styles.SectionCssClass)">
     <div class="@(styles.CssClass)">
-        <div class="row gx-5 align-items-center">
-            @(imageContent.HasImage && !imageContent.ImageAtTheRight){
-            <div class="col-lg-@(imageContent.ImageColumnSize) order-first order-lg-last">
-                <img class="img-fluid rounded mb-5 mb-lg-0" src="@(imageContent.ImageUrl)" alt="@(imageContent.ImageAlt)" />
-            </div>
-            }
-            <div class="col-lg-@(imageContent.ContentColumnSize)">
-                @Html.Raw(imageContent.Content)
-            </div>
-            @(imageContent.HasImage && imageContent.ImageAtTheRight){
-            <div class="col-lg-@(imageContent.ImageColumnSize) order-first order-lg-last">
-                <img class="img-fluid rounded mb-5 mb-lg-0" src="@(imageContent.ImageUrl)" alt="@(imageContent.ImageAlt)" />
-            </div>
-            }
-        </div>
+        @Html.Raw(content.RawContent)
     </div>
 </section>

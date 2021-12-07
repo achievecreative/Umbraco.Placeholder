@@ -1,5 +1,5 @@
 ﻿using AC.Placeholder.Features.Carousels;
-using AC.Placeholder.Features.ImageContents;
+using AC.Placeholder.Features.Contents;
 using AC.Placeholder.Features.Navigations;
 using AC.Placeholder.Features.Panels;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +15,8 @@ namespace AC.Placeholder.Features
             builder.Services.AddScoped<INavigationService, NavigationService>();
             builder.Services.AddScoped<ICarouselService, CarouselService>();
             builder.Services.AddScoped<IPanelListService, PanelListService>();
-            builder.Services.AddScoped<IImageContentService, ImageContentService>();
+            builder.Services.AddScoped<IFeaturePanelService, FeaturePanelService>();
+            builder.Services.AddScoped<IContentService, ContentService>();
         }
     }
 }

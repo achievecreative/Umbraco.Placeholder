@@ -1,6 +1,6 @@
-﻿namespace AC.Placeholder.Features.ImageContents
+﻿namespace AC.Placeholder.Features.Panels
 {
-    public class ImageContent
+    public class FeaturePanel
     {
         public string ImageUrl { get; set; }
 

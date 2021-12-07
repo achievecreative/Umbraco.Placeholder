@@ -1,11 +1,35 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@using AC.Placeholder.Features
+﻿@using AC.Placeholder.Features
+@using AC.Placeholder.Features.Panels
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject IFeaturePanelService _featurePanelService;
+
 @{
-	Layout = null;
+    Layout = null;
+    var featurePanel = _featurePanelService.Get(Model);
+    if (featurePanel == null)
+    {
+        return;
+    }
+
+    var styles = Model.Styles();
 }
-<div class="@(Model.Styles().CssClass)">
-    <div class="row">
-        @Html.Raw(Model.Value("content"))
+
+<section class="@(styles.SectionCssClass)">
+    <div class="@(styles.CssClass)">
+        <div class="row gx-5 align-items-center">
+            @if(featurePanel.HasImage && !featurePanel.ImageAtTheRight){
+            <div class="col-lg-@(featurePanel.ImageColumnSize) order-first order-lg-last">
+                <img class="img-fluid rounded mb-5 mb-lg-0" src="@(featurePanel.ImageUrl)" alt="@(featurePanel.ImageAlt)" />
+            </div>
+            }
+            <div class="col-lg-@(featurePanel.ContentColumnSize)">
+                @Html.Raw(featurePanel.Content)
+            </div>
+            @if(featurePanel.HasImage && featurePanel.ImageAtTheRight){
+            <div class="col-lg-@(featurePanel.ImageColumnSize) order-first order-lg-last">
+                <img class="img-fluid rounded mb-5 mb-lg-0" src="@(featurePanel.ImageUrl)" alt="@(featurePanel.ImageAlt)" />
+            </div>
+            }
+        </div>
     </div>
-</div>
+</section>

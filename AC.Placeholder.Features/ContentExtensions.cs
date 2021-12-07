@@ -41,13 +41,13 @@ namespace AC.Placeholder.Features
             }
 
             var fullWidth = source.GetValue<bool>("fullWidth");
-            var cssClass = $"{source.ContentType.Alias.ToLower()} {source.GetValue<string>("componmentCssClass")} {(fullWidth ? "container-fluid" : "container")}";
+            var cssClass = $"{source.GetValue<string>("componentCssClass")} {(fullWidth ? "container-fluid" : "container")}";
 
             return new StyleSetting()
             {
                 CssClass = cssClass,
                 FullWidth = fullWidth,
-                SectionCssClass = source.GetValue<string>("componentSectionCssClass")
+                SectionCssClass = $"{source.ContentType.Alias.ToLower()} {source.GetValue<string>("componentSectionCssClass")}"
             };
         }
     }

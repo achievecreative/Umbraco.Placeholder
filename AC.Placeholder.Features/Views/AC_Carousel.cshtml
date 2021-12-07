@@ -6,78 +6,79 @@
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = null;
+    Layout = null;
 }
 
 @{
-    var styleSetting = Umbraco.AssignedContentItem.Styles();
-
-    var clientSideId = "carousel_" + Model.Id.ToString();
-
     var carousel = carouselService.Get(Umbraco.AssignedContentItem);
     if (carousel == null)
     {
         return;
     }
+
+    var styleSetting = Umbraco.AssignedContentItem.Styles();
+    var clientSideId = "carousel_" + Model.Id.ToString();
+
     var index = 0;
 }
+<section class="@(styleSetting.SectionCssClass)">
+    <div class="@(styleSetting?.CssClass) pt-1">
+        <div class="row">
+            <div class="col-12">
+                <div id="@(clientSideId)" class="carousel slide" data-ride="carousel">
+                    @if (Model.GetValue<bool>("Indicator"))
+                    {
+                        <ol class="carousel-indicators">
+                            @foreach (var item in carousel.Items)
+                            {
+                                <li data-target="#@(clientSideId)" data-slide-to="@(index++)" class="@(index==1?"active":"")"></li>
+                            }
+                        </ol>
+                    }
+                    <div class="carousel-inner">
+                        @{
+                            index = 0;
+                            foreach (var item in carousel.Items)
+                            {
+                                var hasCaption = !string.IsNullOrEmpty(item.Title) || !string.IsNullOrEmpty(item.Content) || item.CallToAction != null;
 
-<div class="@(styleSetting?.CssClass) pt-1">
-    <div class="row">
-        <div class="col-12">
-            <div id="@(clientSideId)" class="carousel slide" data-ride="carousel">
-                @if (Model.GetValue<bool>("Indicator"))
-                {
-                    <ol class="carousel-indicators">
-                        @foreach (var item in carousel.Items)
-                        {
-                            <li data-target="#@(clientSideId)" data-slide-to="@(index++)" class="@(index==1?"active":"")"></li>
+                                <div class="carousel-item @(index==0?"active":"")">
+                                    <img src="@(item.Image)" class="d-block w-100">
+                                    @if (hasCaption)
+                                    {
+                                        <div class="carousel-caption d-none d-m-block">
+                                            @if (!string.IsNullOrEmpty(item.Title))
+                                            {
+                                                <h5>@(item.Title)</h5>
+                                            }
+                                            @Html.Raw(item.Content)
+                                            @if (item.CallToAction != null)
+                                            {
+                                                <p>
+                                                    <a href="@(item.CallToAction.Url)" @(item.CallToAction.Target)>@(item.CallToAction.Name)</a>
+                                                </p>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+
+                                index++;
+                            }
                         }
-                    </ol>
-                }
-                <div class="carousel-inner">
-                    @{
-                        index = 0;
-                        foreach (var item in carousel.Items)
-                        {
-                            var hasCaption = !string.IsNullOrEmpty(item.Title) || !string.IsNullOrEmpty(item.Content) || item.CallToAction != null;
-
-                            <div class="carousel-item @(index==0?"active":"")">
-                                <img src="@(item.Image)" class="d-block w-100">
-                                @if (hasCaption)
-                                {
-                                    <div class="carousel-caption d-none d-m-block">
-                                        @if (!string.IsNullOrEmpty(item.Title))
-                                        {
-                                            <h5>@(item.Title)</h5>
-                                        }
-                                        @Html.Raw(item.Content)
-                                        @if (item.CallToAction != null)
-                                        {
-                                            <p>
-                                                <a href="@(item.CallToAction.Url)" @(item.CallToAction.Target)>@(item.CallToAction.Name)</a>
-                                            </p>
-                                        }
-                                    </div>
-                                }
-                            </div>
-
-                            index++;
-                        }
+                    </div>
+                    @if (Model.GetValue<bool>("Control"))
+                    {
+                        <a class="carousel-control-prev" href="#@(clientSideId)" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#@(clientSideId)" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     }
                 </div>
-                @if (Model.GetValue<bool>("Control"))
-                {
-                    <a class="carousel-control-prev" href="#@(clientSideId)" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#@(clientSideId)" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                }
             </div>
         </div>
     </div>
-</div>
+</section>

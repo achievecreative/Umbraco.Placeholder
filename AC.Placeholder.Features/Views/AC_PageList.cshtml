@@ -1,49 +1,43 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using AC.Placeholder.Features
+@using AC.Placeholder.Extensions
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = null;
+    Layout = null;
+
+    var styles = Model.Styles();
+
+    var pages = Model.GetValue<IEnumerable<IPublishedContent>>("");
+    if (!(pages?.Any() ?? false))
+    {
+        return;
+    }
 }
-<div class="container">
+<div class="@(styles.SectionCssClass)">
     <div class="row">
-        <div class="col-12">
+        <div class="col">
             <h3>
-                Blog Posts & News
+                @(Model.GetValue<string>("title"))
             </h3>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-lg-4">
-            <div class="card card-post">
-                <figure class="equal equal-50">
-                    <a class="image image-fade" href="post.html" style="background-image: url(assets/images/news-1.jpg)"></a>
-                </figure>
-                <div class="card-body">
-                    <span class="eyebrow text-muted">22 March 2019</span>
-                    <h4 class="card-title"><a href="post.html">The Shoes That will Instantly Update Any Outfit</a></h4>
+        @foreach (var item in pages)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card card-post">
+                    <figure class="equal equal-50">
+                        <a class="image image-fade" href="@(item.Url())" style="background-image: url(assets/images/news-1.jpg)"></a>
+                    </figure>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="@(item.Url())">
+                                @(item.GetValue<string>("title"))
+                            </a>
+                        </h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card card-post">
-                <figure class="equal equal-50">
-                    <a class="image image-fade" href="post.html" style="background-image: url(assets/images/news-1.jpg)"></a>
-                </figure>
-                <div class="card-body">
-                    <span class="eyebrow text-muted">22 March 2019</span>
-                    <h4 class="card-title"><a href="post.html">The Shoes That will Instantly Update Any Outfit</a></h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card card-post">
-                <figure class="equal equal-50">
-                    <a class="image image-fade" href="post.html" style="background-image: url(assets/images/news-1.jpg)"></a>
-                </figure>
-                <div class="card-body">
-                    <span class="eyebrow text-muted">22 March 2019</span>
-                    <h4 class="card-title"><a href="post.html">The Shoes That will Instantly Update Any Outfit</a></h4>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>

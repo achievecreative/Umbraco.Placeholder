@@ -22,9 +22,9 @@
     var index = 0;
 }
 <section class="@(styleSetting.SectionCssClass)">
-    <div class="@(styleSetting?.CssClass) pt-1">
+    <div class="@(styleSetting?.CssClass)">
         <div class="row">
-            <div class="col-12">
+            <div class="col g-0">
                 <div id="@(clientSideId)" class="carousel slide" data-ride="carousel">
                     @if (Model.GetValue<bool>("Indicator"))
                     {

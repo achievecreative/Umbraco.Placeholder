@@ -2,13 +2,17 @@
 @using AC.Placeholder.Features
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = null;
+    Layout = null;
+
+    var styles = Model.Styles();
 }
 
-<div class="@(Model.Styles().CssClass)">
-    <div class="row">
-        <div class="inner">
-            <iframe src="@Html.Raw(Model.Value("embedCode"))" width="100%"  height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+<div class="@(styles.SectionCssClass)">
+    <div class="@(styles.CssClass)">
+        <div class="row">
+            <div class="g-0">
+                <iframe src="@Html.Raw(Model.Value("embedCode"))" width="100%" height="450" frameborder="0" style="border: 0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 </div>
